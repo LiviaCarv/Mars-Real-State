@@ -4,9 +4,17 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.project.marsrealstate.R
 import com.project.marsrealstate.databinding.FragmentOverviewBinding
 
@@ -25,6 +33,30 @@ class OverviewFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        // ADDING THE MENU
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(
+
+
+
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.overflow_menu, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return NavigationUI.onNavDestinationSelected(
+                        menuItem,
+                        requireView().findNavController()
+                    )
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+
+        )
 
 
 
