@@ -3,10 +3,8 @@ package com.project.marsrealstate.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 
 private const val BASE_URL = "https://mars.udacity.com/"
@@ -22,7 +20,7 @@ private val retrofit = Retrofit.Builder()
 
 interface MarsAPIService {
     @GET("realestate")
-    fun getProperties(): Call<List<MarsProperty>>
+    suspend fun getProperties(): List<MarsProperty>
 }
 
 object MarsAPI {

@@ -56,12 +56,6 @@ dependencies {
     // Constraint Layout
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    // Room and Lifecycle dependencies
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-    kapt("androidx.room:room-compiler:2.6.1")
-
     // Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:2.6.1")
 
