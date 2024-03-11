@@ -34,13 +34,13 @@ class OverviewFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        binding.photosGrid.adapter = PhotoGridAdapter()
+
+
         // ADDING THE MENU
         val menuHost: MenuHost = requireActivity()
 
         menuHost.addMenuProvider(
-
-
-
             object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     menuInflater.inflate(R.menu.overflow_menu, menu)
