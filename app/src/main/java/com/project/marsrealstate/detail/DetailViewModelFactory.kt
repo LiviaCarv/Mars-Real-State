@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.marsrealstate.network.MarsProperty
 
-class DetailFactory(private val marsProperty: MarsProperty, private val application: Application) : ViewModelProvider.Factory {
+class DetailViewModelFactory(private val marsProperty: MarsProperty, private val application: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(marsProperty, application) as T
