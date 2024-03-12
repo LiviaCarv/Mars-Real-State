@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.project.marsrealstate.R
 import com.project.marsrealstate.databinding.FragmentOverviewBinding
+import com.project.marsrealstate.network.MarsApiFilter
 
 class OverviewFragment : Fragment() {
 
@@ -56,11 +57,15 @@ class OverviewFragment : Fragment() {
                     menuInflater.inflate(R.menu.overflow_menu, menu)
                 }
 
+
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                    return NavigationUI.onNavDestinationSelected(
-                        menuItem,
-                        requireView().findNavController()
-                    )
+                    viewModel.updateFilter(
+                        when ( menuItem.itemId) {
+                            R.id.show_buy_menu  -> MarsApiFilter.SHOW_BUY
+                            R.id.show_rent_menu  -> MarsApiFilter.SHOW_RENT
+                            else -> MarsApiFilter.SHOW_ALL
+                        })
+                    return true
                 }
             },
             viewLifecycleOwner,

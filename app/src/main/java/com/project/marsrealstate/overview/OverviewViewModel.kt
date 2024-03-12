@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.marsrealstate.network.MarsAPI
+import com.project.marsrealstate.network.MarsApiFilter
 import com.project.marsrealstate.network.MarsProperty
 import kotlinx.coroutines.launch
 
@@ -23,14 +24,14 @@ class OverviewViewModel : ViewModel() {
     val navigateToSelectedProperty: LiveData<MarsProperty?>
         get() = _navigateToSelectedProperty
     init {
-        getMarsRealEstateProperties()
+        getMarsRealEstateProperties(MarsApiFilter.SHOW_ALL)
     }
 
-    private fun getMarsRealEstateProperties() {
+    private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
         viewModelScope.launch {
             try {
                 _status.value = MarsApiStatus.LOADING
-                val listResult = MarsAPI.retrofitService.getProperties()
+                val listResult = MarsAPI.retrofitService.getProperties(filter.value)
                 _status.value = MarsApiStatus.DONE
                 if (listResult.isNotEmpty()) {
                     _properties.value = listResult
@@ -48,5 +49,9 @@ class OverviewViewModel : ViewModel() {
 
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProperty.value = null
+    }
+
+    fun updateFilter(filter: MarsApiFilter) {
+        getMarsRealEstateProperties(filter)
     }
 }
